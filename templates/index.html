@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ML API</title>
+
+</head>
+
+<body>
+    <div class="login">
+        <h1>Airport Wait Time Model</h1>
+
+        <form action = "{{url_for('predict')}}" method = "post">
+            <input type="text" name = "citizenship" placeholder="1" required="required"/>
+            <input type="text" name = "Year" placeholder="2026" required="required"/>
+            <input type="text" name = "Month" placeholder="1" required="required"/>
+            <input type="text" name = "Day" placeholder="0" required="required"/>
+            <input type="text" name = "sin_hour" placeholder="1" required="required"/>
+            <input type="text" name = "cos_hour" placeholder="1" required="required"/>
+            <input type="text" name = "sin_day" placeholder="1" required="required"/>
+            <input type="text" name = "cos_day" placeholder="1" required="required"/>
+
+            <button type="submit" class = "btn btn-primary btn-block btn-large">Predict</button>
+        </form>
+
+        <h1 id = "predi">
+            {{prediction_text}}
+        </h1>
+    </div>
+</body>
+</html>
