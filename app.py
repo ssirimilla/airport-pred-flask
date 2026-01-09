@@ -4,6 +4,7 @@ from flask import Flask, request, render_template
 import pandas as pd
 import os
 import xgboost as xgb
+from datetime import datetime
 
 # ---------- Load model ----------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -22,19 +23,38 @@ def Home():
 @app.route("/predict", methods=["POST"])
 def predict():
     form = request.form
+    # ---- Parse inputs ----
+    citizenship = float(form["citizenship"])
 
-    feature_test = {
-        "citizenship": float(form["citizenship"]),
-        "Year": float(form["Year"]),
-        "Month": float(form["Month"]),
-        "Day": float(form["Day"]),
-        "sin_hour": float(form["sin_hour"]),
-        "cos_hour": float(form["cos_hour"]),
-        "sin_day": float(form["sin_day"]),
-        "cos_day": float(form["cos_day"]),
-    }
+    date_str = form["date"]      # YYYY-MM-DD
+    time_str = form["time"]      # HH:MM
 
-    test = pd.DataFrame([feature_test]).astype(float)
+    dt = datetime.strptime(f"{date_str} {time_str}", "%Y-%m-%d %H:%M")
+
+    year = dt.year
+    month = dt.month
+    day = dt.weekday()  # 0 = Monday
+
+    hour = dt.hour + dt.minute / 60.0
+
+    # ---- Cyclical encoding ----
+    sin_hour = np.sin(2 * np.pi * hour / 24)
+    cos_hour = np.cos(2 * np.pi * hour / 24)
+
+    sin_day = np.sin(2 * np.pi * day / 7)
+    cos_day = np.cos(2 * np.pi * day / 7)
+
+    # ---- Build dataframe ----
+    test = pd.DataFrame([{
+        "citizenship": citizenship,
+        "Year": year,
+        "Month": month,
+        "Day": day,
+        "sin_hour": sin_hour,
+        "cos_hour": cos_hour,
+        "sin_day": sin_day,
+        "cos_day": cos_day
+    }])
 
     # Ensure column order is exactly the same as training
     expected_order = [

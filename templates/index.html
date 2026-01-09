@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,14 +11,10 @@
         <h1>Airport Wait Time Model</h1>
 
         <form action = "{{url_for('predict')}}" method = "post">
-            <input type="text" name = "citizenship" placeholder="1" required="required"/>
-            <input type="text" name = "Year" placeholder="2026" required="required"/>
-            <input type="text" name = "Month" placeholder="1" required="required"/>
-            <input type="text" name = "Day" placeholder="0" required="required"/>
-            <input type="text" name = "sin_hour" placeholder="1" required="required"/>
-            <input type="text" name = "cos_hour" placeholder="1" required="required"/>
-            <input type="text" name = "sin_day" placeholder="1" required="required"/>
-            <input type="text" name = "cos_day" placeholder="1" required="required"/>
+            <input type="number" name="citizenship" placeholder="Citizenship (0 or 1)" required />
+
+            <input type="date" name="date" required />
+            <input type="time" name="time" required />
 
             <button type="submit" class = "btn btn-primary btn-block btn-large">Predict</button>
         </form>
@@ -27,5 +23,91 @@
             {{prediction_text}}
         </h1>
     </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Airport Wait Time Predictor</title>
+
+    <!-- Bootswatch Flatly Theme -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/flatly/bootstrap.min.css"
+      rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<nav class="navbar navbar-dark bg-primary">
+    <div class="container">
+        <span class="navbar-brand mb-0 h1">
+            ✈️ Airport Wait Time Predictor
+        </span>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow-sm p-4">
+                <h4 class="text-center mb-4">
+                    Enter Travel Information
+                </h4>
+
+                <form action="{{ url_for('predict') }}" method="post">
+
+                    <div class="mb-3">
+                        <label class="form-label">Citizenship</label>
+                        <input
+                            type="number"
+                            name="citizenship"
+                            class="form-control"
+                            placeholder="0 = Non-US, 1 = US"
+                            min="0"
+                            max="1"
+                            required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Date</label>
+                        <input
+                            type="date"
+                            name="date"
+                            class="form-control"
+                            required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Time</label>
+                        <input
+                            type="time"
+                            name="time"
+                            class="form-control"
+                            required>
+                    </div>
+
+                    <button class="btn btn-primary w-100 mt-3">
+                        Predict Wait Time
+                    </button>
+                </form>
+
+                {% if prediction_text %}
+                <div class="alert alert-info text-center mt-4">
+                    <strong>{{ prediction_text }}</strong>
+                </div>
+                {% endif %}
+            </div>
+
+            <p class="text-center text-muted mt-3">
+                Powered by XGBoost • Flask • Render
+            </p>
+
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
