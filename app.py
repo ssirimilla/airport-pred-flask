@@ -13,7 +13,7 @@ MODEL_PATH = os.path.join(BASE_DIR, "analysis", "xgb_model.json")
 booster = xgb.Booster()
 booster.load_model(MODEL_PATH)
 
-# ---------- Flask app ----------
+# ---------- Flask app ---------- 
 app = Flask(__name__)
 
 @app.route("/")
