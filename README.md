@@ -2,8 +2,8 @@
 
 A full-stack machine learning web application that predicts LAX airport's tom bradley international airport wait times using an XGBoost regression model with cyclical time-based features. The model is packaged behind a Flask web app and deployed to the cloud for public inference.
 
-🔗 Live Demo: https://airport-pred-flask.onrender.com/
-🔗 GitHub Repo: https://github.com/ssirimilla/airport-pred-flask
+- 🔗 Live Demo: https://airport-pred-flask.onrender.com/
+- 🔗 GitHub Repo: https://github.com/ssirimilla/airport-pred-flask
 
 ---
 
@@ -38,7 +38,7 @@ This project focuses on predicting airport wait times using historical data and 
 
 ---
 
-🌐 Web Application
+## 🌐 Web Application
 
 - Backend: Flask
 - Frontend: HTML + Bootstrap (Bootswatch theme)
@@ -51,27 +51,31 @@ This project focuses on predicting airport wait times using historical data and 
 
 ---
 
-🚀 Running Locally
+## 🚀 Running Locally
 
 1. Clone the repository
-```git clone https://github.com/ssirimilla/airport-pred-flask.git
+```bash
+git clone https://github.com/ssirimilla/airport-pred-flask.git
 cd airport-pred-flask
 ```
 2. Create and activate a virtual environment
-```python -m venv venv
+```bash
+python -m venv venv
 source venv/bin/activate
 ```
 3. Install dependencies
-```pip install -r requirements.txt
+```bash
+pip install -r requirements.txt
 ```
 4. Run the app
-```python app.py
+```bash
+python app.py
 ```
 Visit the link it generates.
 
 ---
 
-📦 Dependencies
+## 📦 Dependencies
 
 'requirements.txt' has:
 
@@ -84,12 +88,11 @@ Visit the link it generates.
 
 ---
 
-⚖️ Fairness Considerations
+## ⚖️ Fairness Considerations
 
 The project includes an analysis of model performance across different citizenship groups. Results indicated persistent disparities in prediction error, highlighting the importance of fairness evaluation even in non-traditional ML domains.
 
 ---
 
-👤 Author
-Sujal Sirimilla
-Data Science @ UC San Diego
+## 👤 Author
+Sujal Sirimilla; Data Science @ UC San Diego
